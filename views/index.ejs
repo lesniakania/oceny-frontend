@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Hello Tab</title>
+    <% if (isDevelopment) { %>
+      <link href="bundle.css" rel="stylesheet">
+    <% } %>
+  </head>
+  <body>
+    <div id="app"><%- app %></div>
+    <% if (isDevelopment) { %>
+      <script src="bundle.js"></script>
+    <% } %>
+  </body>
+</html>
+
