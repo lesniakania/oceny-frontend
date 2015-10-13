@@ -9,6 +9,7 @@ module.exports = {
   entry: DefaultConfig.Entries,
   output: {
     path: DefaultConfig.Dist,
+    publicPath: '/',
     filename: DefaultConfig.BundleName + '-[hash].min.js'
   },
   module: {

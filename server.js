@@ -18,10 +18,10 @@ const isProduction = process.env.NODE_ENV === 'production';
 
 app.engine('ejs', require('ejs').__express);
 app.set('view engine', 'ejs');
+app.use(Express.static(DefaultConfig.Dist));
 
 if (isProduction) {
   app.set('views', DefaultConfig.Dist);
-  app.use(Express.static(DefaultConfig.Dist));
 }
 
 if (isDevelopment) {
