@@ -24,7 +24,7 @@ class SubmissionsList extends React.Component {
     return (
       <div>
         <h2>You are in {this.props.route.type}</h2>
-        <table className="SubmissionsList">
+        <table className="submissions-list">
           <thead><tr>{tableHeaders}</tr></thead>
           {this.tableBody()}
         </table>

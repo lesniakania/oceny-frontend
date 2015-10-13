@@ -9,6 +9,7 @@ class Main extends React.Component {
           <li><Link to="/pending">Pending</Link></li>
           <li><Link to="/evaluated">Evaluated</Link></li>
           <li><Link to="/rejected">Rejected</Link></li>
+          <li><Link to="/submissions/new">Submission form</Link></li>
         </ul>
         {this.props.children}
       </div>

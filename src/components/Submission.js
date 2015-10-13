@@ -20,7 +20,7 @@ class Submission extends React.Component {
     const submission = this.state.submission;
 
     return (
-      <div>
+      <div className="submission">
         <h2>Submission</h2>
         <ul>
           <li>Id: {this.state.submission.id}</li>
