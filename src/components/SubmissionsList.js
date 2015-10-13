@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router';
 
 class SubmissionsList extends React.Component {
   headersList() {
@@ -7,6 +8,10 @@ class SubmissionsList extends React.Component {
 
   tableBody() {
     return '';
+  }
+
+  submissionLink(submission) {
+    return (<Link to={`/submissions/${submission.id}`}>Show</Link>);
   }
 
   render() {

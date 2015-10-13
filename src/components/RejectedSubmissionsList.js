@@ -20,7 +20,7 @@ class RejectedSubmissionsList extends SubmissionsList {
   }
 
   headersList() {
-    return ['Name', 'Reason'];
+    return ['Name', 'Reason', ''];
   }
 
   tableBody() {
@@ -29,6 +29,7 @@ class RejectedSubmissionsList extends SubmissionsList {
         <tr key={submission.id}>
           <td>{submission.name}</td>
           <td>{submission.reason}</td>
+          <td>{this.submissionLink(submission)}</td>
         </tr>
       );
     });

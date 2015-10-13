@@ -29,6 +29,7 @@ class EvaluatedSubmissionsList extends SubmissionsList {
         <tr key={submission.id}>
           <td>{submission.name}</td>
           <td>{submission.mark}</td>
+          <td>{this.submissionLink(submission)}</td>
         </tr>
       );
     });

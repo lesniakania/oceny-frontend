@@ -26,7 +26,10 @@ class PendingSubmissionsList extends SubmissionsList {
   tableBody() {
     const body = this.state.submissions.map(submission => {
       return (
-        <tr key={submission.id}><td>{submission.name}</td></tr>
+        <tr key={submission.id}>
+          <td>{submission.name}</td>
+          <td>{this.submissionLink(submission)}</td>
+        </tr>
       );
     });
 
