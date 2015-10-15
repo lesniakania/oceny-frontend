@@ -1,34 +1,32 @@
 import React from 'react';
-import { Link } from 'react-router';
+import SubmissionLink from './SubmissionLink';
 
 class SubmissionsList extends React.Component {
-  headersList() {
-    return [];
-  }
-
-  tableBody() {
-    return '';
-  }
-
-  submissionLink(submission) {
-    return (<Link to={`/submissions/${submission.id}`}>Show</Link>);
-  }
-
   render() {
-    const tableHeaders = this.headersList().map(header => {
+    const headers = this.props.attributes.map(header => {
       return (
-        <th key={header}>{header}</th>
+        <th key={`header-${header}`}>{header}</th>
+      );
+    });
+
+    const body = this.props.submissions.map(submission => {
+      const tr = this.props.attributes.map(attribute => {
+        return (<td key={`value-${attribute}`}>{submission[attribute]}</td>);
+      });
+
+      return (
+        <tr key={submission.id}>
+          {tr}
+          <td><SubmissionLink submission_id={submission.id} /></td>
+        </tr>
       );
     });
 
     return (
-      <div>
-        <h2>You are in {this.props.route.type}</h2>
-        <table className="submissions-list">
-          <thead><tr>{tableHeaders}</tr></thead>
-          {this.tableBody()}
-        </table>
-      </div>
+      <table>
+        <thead><tr>{headers}</tr></thead>
+        <tbody>{body}</tbody>
+      </table>
     )
   }
 };

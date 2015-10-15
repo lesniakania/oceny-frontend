@@ -1,7 +1,7 @@
 import React from 'react';
 import SubmissionsList from './SubmissionsList';
 
-class EvaluatedSubmissionsList extends SubmissionsList {
+class EvaluatedSubmissionsList extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -19,23 +19,10 @@ class EvaluatedSubmissionsList extends SubmissionsList {
     });
   }
 
-  headersList() {
-    return ['Name', 'Mark'];
-  }
-
-  tableBody() {
-    const body = this.state.submissions.map(submission => {
-      return (
-        <tr key={submission.id}>
-          <td>{submission.name}</td>
-          <td>{submission.mark}</td>
-          <td>{this.submissionLink(submission)}</td>
-        </tr>
-      );
-    });
-
+  render() {
     return (
-      <tbody>{body}</tbody>
+      <SubmissionsList attributes={['name', 'mark']}
+        submissions={this.state.submissions} />
     );
   }
 };

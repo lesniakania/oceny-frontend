@@ -19,22 +19,10 @@ class PendingSubmissionsList extends SubmissionsList {
     });
   }
 
-  headersList() {
-    return ['Name'];
-  }
-
-  tableBody() {
-    const body = this.state.submissions.map(submission => {
-      return (
-        <tr key={submission.id}>
-          <td>{submission.name}</td>
-          <td>{this.submissionLink(submission)}</td>
-        </tr>
-      );
-    });
-
+  render() {
     return (
-      <tbody>{body}</tbody>
+      <SubmissionsList attributes={['name']}
+        submissions={this.state.submissions} />
     );
   }
 };
