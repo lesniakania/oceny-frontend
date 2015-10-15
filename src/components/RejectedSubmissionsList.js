@@ -1,5 +1,6 @@
 import React from 'react';
 import SubmissionsList from './SubmissionsList';
+import Connection from '../lib/Connection';
 
 class RejectedSubmissionsList extends React.Component {
   constructor(props) {
@@ -10,18 +11,14 @@ class RejectedSubmissionsList extends React.Component {
   }
 
   componentDidMount() {
-    this.loadSubmissions()
-  }
-
-  loadSubmissions() {
-    this.setState({
-      submissions: [{ id: 1, name: 'Ania', reason: 'Too young' }]
+    Connection.get('/submissions/rejected', (response) => {
+      this.setState({ submissions: response.data });
     });
   }
 
   render() {
     return (
-      <SubmissionsList attributes={['name', 'reason']}
+      <SubmissionsList attributes={['first_name', 'reason']}
         submissions={this.state.submissions} />
     );
   }

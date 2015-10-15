@@ -23,7 +23,7 @@ class Submission extends React.Component {
       <div className="submission">
         <h2>Submission</h2>
         <ul>
-          <li>Id: {this.state.submission.id}</li>
+          <li>Id: {submission.id}</li>
           <li>Name: {submission.name}</li>
           <li>status: {submission.status}</li>
         </ul>
