@@ -4,15 +4,13 @@ import ReactDOM from 'react-dom';
 class SubmissionForm extends React.Component {
   handleSubmit(e) {
     e.preventDefault();
-    let firstNameNode = ReactDOM.findDOMNode(this.refs.firstName)
-    const firstName = firstNameNode.value.trim();
+    const firstName = this.refs.firstName.value.trim();
     console.log(firstName);
-    firstNameNode.value = '';
+    this.refs.firstName.value = '';
 
-    let lastNameNode = ReactDOM.findDOMNode(this.refs.lastName)
-    const lastName = lastNameNode.value.trim();
+    const lastName = this.refs.lastName.value.trim();
     console.log(lastName);
-    lastNameNode.value = '';
+    this.refs.lastName.value = '';
   }
 
   render() {
