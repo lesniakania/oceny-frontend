@@ -1,4 +1,5 @@
 import React from 'react';
+import Connection from '../lib/Connection';
 
 class Submission extends React.Component {
   constructor(props) {
@@ -7,12 +8,9 @@ class Submission extends React.Component {
   }
 
   componentDidMount() {
-    this.loadSubmission();
-  }
-
-  loadSubmission() {
-    this.setState({
-      submission: { id: 1, name: 'Ania', status: 'rejected' }
+    const submission_id = this.props.params.id;
+    Connection.get(`/submissions/${submission_id}`, (response) => {
+      this.setState({ submission: response.data });
     });
   }
 
@@ -24,8 +22,8 @@ class Submission extends React.Component {
         <h2>Submission</h2>
         <ul>
           <li>Id: {submission.id}</li>
-          <li>Name: {submission.name}</li>
-          <li>status: {submission.status}</li>
+          <li>First Name: {submission.first_name}</li>
+          <li>Last Name: {submission.last_name}</li>
         </ul>
       </div>
     )
