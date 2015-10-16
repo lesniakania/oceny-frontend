@@ -1,16 +1,24 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import Connection from '../lib/Connection';
 
 class SubmissionForm extends React.Component {
   handleSubmit(e) {
     e.preventDefault();
     const firstName = this.refs.firstName.value.trim();
-    console.log(firstName);
-    this.refs.firstName.value = '';
-
     const lastName = this.refs.lastName.value.trim();
-    console.log(lastName);
+    this.refs.firstName.value = '';
     this.refs.lastName.value = '';
+
+    const data = {
+      submission: {
+        first_name: firstName,
+        last_name: lastName
+      }
+    };
+    Connection.post('/submissions', data, () => {
+      console.log(data);
+    });
   }
 
   render() {
