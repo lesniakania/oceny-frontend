@@ -1,26 +1,36 @@
 import React from 'react';
-import Connection from '../lib/Connection';
 import Rate from './Rate';
+import Submission from './Submission';
+import SubmissionStore from '../stores/SubmissionStore';
+import SubmissionActionsCreator from '../actions/SubmissionActionsCreator';
 
 class SubmissionPage extends React.Component {
   constructor(props) {
     super(props);
     this.state = { submission: {} };
+    this._onChange = this.onChange.bind(this);
   }
 
   componentDidMount() {
-    const submission_id = this.props.params.id;
-    Connection.get(`/submissions/${submission_id}`).then((response) => {
-      this.setState({ submission: response.data });
-    });
+    const id = this.props.params.id;
+    SubmissionActionsCreator.requestSubmission(id);
   }
 
-  performRating(rate) {
-    const submission = this.state.submission;
-    Connection.post(`/submissions/${submission.id}/rate`, { rate: rate }).then(
-      (response) => {
-      this.setState({ submission: response.data });
-    });
+  componentWillMount() {
+    SubmissionStore.addChangeListener(this._onChange);
+  }
+
+  componentWillUnmount() {
+    SubmissionStore.removeChangeListener(this._onChange);
+  }
+
+  onChange() {
+    this.setState({ submission: SubmissionStore.getSubmission() });
+  }
+
+  performRating(value) {
+    const id = this.state.submission.id;
+    SubmissionActionsCreator.performRating(id, value);
   }
 
   render() {
@@ -28,14 +38,7 @@ class SubmissionPage extends React.Component {
 
     return (
       <div>
-        <div className="submission">
-          <h2>Submission</h2>
-          <ul>
-            <li>Id: {submission.id}</li>
-            <li>First Name: {submission.first_name}</li>
-            <li>Last Name: {submission.last_name}</li>
-          </ul>
-        </div>
+        <Submission submission={submission} />
         <Rate rate={submission.rate} performRating={this.performRating.bind(this)} />
       </div>
     )
