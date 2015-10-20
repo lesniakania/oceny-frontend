@@ -1,12 +1,9 @@
-import { EventEmitter } from 'events';
-import {ReduceStore} from 'flux/utils';
+import BaseStore from './BaseStore';
 import AppDispatcher from '../AppDispatcher';
 import ActionTypes from '../constants/ActionTypes';
 import Connection from '../lib/Connection';
 
-const CHANGE_EVENT = 'change';
-
-class SubmissionStore extends EventEmitter {
+class SubmissionStore extends BaseStore {
   constructor() {
     super();
 
@@ -15,18 +12,6 @@ class SubmissionStore extends EventEmitter {
 
   getSubmission(submissionId) {
     return this.submission;
-  }
-
-  addChangeListener(listener) {
-    this.addListener(CHANGE_EVENT, listener);
-  }
-
-  removeChangeListener(listener) {
-    this.removeListener(CHANGE_EVENT, listener);
-  }
-
-  emitChange() {
-    this.emit(CHANGE_EVENT);
   }
 }
 

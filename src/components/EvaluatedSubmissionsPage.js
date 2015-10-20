@@ -1,26 +1,13 @@
 import React from 'react';
-import SubmissionsList from './SubmissionsList';
-import Connection from '../lib/Connection';
+import SubmissionsListPage from './SubmissionsListPage';
 
-class EvaluatedSubmissionsPage extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      submissions: []
-    };
+class EvaluatedSubmissionsPage extends SubmissionsListPage {
+  submissionsType() {
+    return 'evaluated';
   }
 
-  componentDidMount() {
-    Connection.get('/submissions/evaluated').then((response) => {
-      this.setState({ submissions: response.data });
-    });
-  }
-
-  render() {
-    return (
-      <SubmissionsList attributes={['first_name', 'avg_mark']}
-        submissions={this.state.submissions} />
-    );
+  attributes() {
+    return ['mark'];
   }
 };
 
