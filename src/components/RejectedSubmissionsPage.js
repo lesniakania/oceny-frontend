@@ -1,14 +1,30 @@
 import React from 'react';
+import SubmissionsList from './SubmissionsList';
 import SubmissionsListPage from './SubmissionsListPage';
+import { select } from './SubmissionsListPage';
+import { connect } from 'react-redux';
+import { fetchSubmissionsList } from '../actions_creators/SubmissionsListActionsCreator';
 
 class RejectedSubmissionsPage extends SubmissionsListPage {
-  submissionsType() {
-    return 'rejected';
+  static fetchData(dispatch, params) {
+    return dispatch(fetchSubmissionsList('rejected'));
   }
 
-  attributes() {
+  componentWillMount() {
+    RejectedSubmissionsPage.fetchData(this.props.dispatch);
+  }
+
+  additionalAttributes() {
     return ['reason'];
+  }
+
+  render() {
+    return (
+      <SubmissionsList attributes={this.attributes()}
+        submissions={this.props.submissions} />
+    );
   }
 };
 
-export default RejectedSubmissionsPage;
+export default connect(select)(RejectedSubmissionsPage);
+
