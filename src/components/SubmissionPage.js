@@ -2,7 +2,7 @@ import React from 'react';
 import Connection from '../lib/Connection';
 import Rate from './Rate';
 
-class Submission extends React.Component {
+class SubmissionPage extends React.Component {
   constructor(props) {
     super(props);
     this.state = { submission: {} };
@@ -10,14 +10,17 @@ class Submission extends React.Component {
 
   componentDidMount() {
     const submission_id = this.props.params.id;
-    Connection.get(`/submissions/${submission_id}`, (response) => {
+    Connection.get(`/submissions/${submission_id}`).then((response) => {
       this.setState({ submission: response.data });
     });
   }
 
-  performRating(value) {
-    this.setState({ rate: value });
-    // call to API
+  performRating(rate) {
+    const submission = this.state.submission;
+    Connection.post(`/submissions/${submission.id}/rate`, { rate: rate }).then(
+      (response) => {
+      this.setState({ submission: response.data });
+    });
   }
 
   render() {
@@ -33,10 +36,10 @@ class Submission extends React.Component {
             <li>Last Name: {submission.last_name}</li>
           </ul>
         </div>
-        <Rate rate={this.state.rate} performRating={this.performRating.bind(this)} />
+        <Rate rate={submission.rate} performRating={this.performRating.bind(this)} />
       </div>
     )
   }
 };
 
-export default Submission;
+export default SubmissionPage;

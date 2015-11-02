@@ -16,7 +16,7 @@ class SubmissionForm extends React.Component {
         last_name: lastName
       }
     };
-    Connection.post('/submissions', data, () => {
+    Connection.post('/submissions', data).then(() => {
       console.log(data);
     });
   }
@@ -24,9 +24,17 @@ class SubmissionForm extends React.Component {
   render() {
     return (
       <form className="submission-form" onSubmit={this.handleSubmit.bind(this)}>
-        <div><input name="Name" ref="firstName" /></div>
-        <div><input name="Lastname" ref="lastName" /></div>
-        <div><input type="submit" value="Submit" /></div>
+        <div className="form-field">
+          <div className="label">First name:</div>
+          <input name="Name" ref="firstName" />
+        </div>
+        <div className="form-field">
+          <div className="label">Last name:</div>
+          <input name="Lastname" ref="lastName" />
+        </div>
+        <div className="form-field">
+          <input type="submit" value="Submit" />
+        </div>
       </form>
     )
   }

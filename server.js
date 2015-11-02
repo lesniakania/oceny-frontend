@@ -6,10 +6,8 @@ import http from 'http';
 import Routes from './src/routes';
 import Webpack from 'webpack';
 import WebpackMiddleware from 'webpack-dev-middleware';
-import WebpackHotMiddleware from 'webpack-hot-middleware';
 import DefaultConfig from './webpack/default.config.js';
 import DevConfig from './webpack/development.config.js';
-import path from 'path';
 
 let app = Express();
 let port = process.env.PORT || DefaultConfig.Port;
@@ -20,17 +18,16 @@ app.engine('ejs', require('ejs').__express);
 app.set('view engine', 'ejs');
 app.use(Express.static(DefaultConfig.Dist));
 
-if (isProduction) {
-  app.set('views', DefaultConfig.Dist);
-}
-
 if (isDevelopment) {
   const compiler = Webpack(DevConfig);
   app.use(WebpackMiddleware(compiler, {
     publicPath: DevConfig.output.publicPath,
     noInfo: true
   }));
-  app.use(WebpackHotMiddleware(compiler));
+}
+
+if (isProduction) {
+  app.set('views', DefaultConfig.Dist);
 }
 
 app.use((req, res) => {

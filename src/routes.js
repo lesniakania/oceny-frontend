@@ -1,20 +1,19 @@
 import React from 'react';
-import { Route, IndexRoute } from 'react-router';
+import { Route } from 'react-router';
 import Main from './components/Main';
-import PendingSubmissionsList from './components/PendingSubmissionsList';
-import RejectedSubmissionsList from './components/RejectedSubmissionsList';
-import EvaluatedSubmissionsList from './components/EvaluatedSubmissionsList';
-import SubmissionsList from './components/SubmissionsList';
-import Submission from './components/Submission';
-import SubmissionForm from './components/SubmissionForm';
+import PendingSubmissionsPage from './components/PendingSubmissionsPage';
+import RejectedSubmissionsPage from './components/RejectedSubmissionsPage';
+import EvaluatedSubmissionsPage from './components/EvaluatedSubmissionsPage';
+import SubmissionPage from './components/SubmissionPage';
+import SubmissionFormPage from './components/SubmissionFormPage';
 
 export default (
   <Route path="/" component={Main}>
-    <Route path="pending" component={PendingSubmissionsList} type="pending" />
-    <Route path="evaluated" component={EvaluatedSubmissionsList} type="evaluated" />
-    <Route path="rejected" component={RejectedSubmissionsList} type="rejected" />
-    <Route path="submissions/new" component={SubmissionForm} />
-    <Route path="submissions/:id" component={Submission} />
+    <Route path="pending" component={PendingSubmissionsPage} />
+    <Route path="evaluated" component={EvaluatedSubmissionsPage} />
+    <Route path="rejected" component={RejectedSubmissionsPage} />
+    <Route path="submissions/new" component={SubmissionFormPage} />
+    <Route path="submissions/:id" component={SubmissionPage} />
   </Route>
 );
 

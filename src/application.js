@@ -8,5 +8,4 @@ let history = createHistory()
 
 var app = document.getElementById('app');
 
-ReactDOM.render(<Router history={history} routes={Routes} />,
-                app);
+ReactDOM.render(<Router history={history} routes={Routes} />, app);

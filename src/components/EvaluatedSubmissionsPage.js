@@ -2,7 +2,7 @@ import React from 'react';
 import SubmissionsList from './SubmissionsList';
 import Connection from '../lib/Connection';
 
-class EvaluatedSubmissionsList extends React.Component {
+class EvaluatedSubmissionsPage extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -11,7 +11,7 @@ class EvaluatedSubmissionsList extends React.Component {
   }
 
   componentDidMount() {
-    Connection.get('/submissions/evaluated', (response) => {
+    Connection.get('/submissions/evaluated').then((response) => {
       this.setState({ submissions: response.data });
     });
   }
@@ -24,4 +24,4 @@ class EvaluatedSubmissionsList extends React.Component {
   }
 };
 
-export default EvaluatedSubmissionsList;
+export default EvaluatedSubmissionsPage;

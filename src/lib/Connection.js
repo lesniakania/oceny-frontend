@@ -1,15 +1,17 @@
 import Axios from 'axios';
 
+const BASE_URL = 'http://localhost:3001/api';
+
 class Connection {
-  static get(path, callback) {
-    Axios.get(`${Connection.BASE_URL}${path}`).then(callback)
+  get(path) {
+    return Axios.get(`${BASE_URL}${path}`)
   }
 
-  static post(path, data, callback) {
-    Axios.post(`${Connection.BASE_URL}${path}`, data).then(callback)
+  post(path, data) {
+    return Axios.post(`${BASE_URL}${path}`, data)
   }
 }
 
-Connection.BASE_URL = 'http://localhost:3001/api';
+const connection = new Connection();
 
-export default Connection;
+export default connection;
