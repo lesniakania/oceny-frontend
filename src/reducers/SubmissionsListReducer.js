@@ -12,7 +12,7 @@ let SubmissionsListReducer = (state = {}, action) => {
     });
     return newState;
   case ActionTypes.RECEIVE_SUBMISSION:
-  case ActionTypes.PERFORM_RATING:
+  case ActionTypes.RATING_PERFORMED:
     let submissionId = action.submission.id
     newState = {
       [submissionId]: SubmissionReducer(state[submissionId], action)

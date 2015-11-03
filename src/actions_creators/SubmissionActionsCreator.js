@@ -1,17 +1,36 @@
 import ActionTypes from '../constants/ActionTypes';
 import Connection from '../lib/Connection';
 
-const _performRating = (submission, rate) => {
+const _requestPerformRating = (id) => {
   return {
     type: ActionTypes.PERFORM_RATING,
-    submission: submission,
-    rate: rate
+    id: id
   }
+}
+
+const _ratingPerfomed = (submission) => {
+  return {
+    type: ActionTypes.RATING_PERFORMED,
+    submission: submission
+  };
+}
+
+const _performRating = (submission, rate) => {
+  return (dispatch) => {
+    const id = submission.id
+    dispatch(_requestPerformRating(id));
+
+    return Connection.post(`/submissions/${id}/rate`, { rate: rate })
+      .then((response) => {
+        dispatch(_ratingPerfomed(response.data))
+      });
+  };
 }
 
 const _requestSubmission = (id) => {
   return {
-    type: ActionTypes.REQUEST_SUBMISSION
+    type: ActionTypes.REQUEST_SUBMISSION,
+    id: id
   };
 }
 
